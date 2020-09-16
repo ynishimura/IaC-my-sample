@@ -1,0 +1,20 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+Description: shared resources
+
+Parameters:
+  BucketNameParam:
+    Type: String
+    Default: "create-s3-bucket"
+    Description: Enter Bucket Name
+
+Resources:
+  Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub ${BucketNameParam}-${AWS::Region}-${AWS::AccountId}
+
+Outputs:
+  BucketName:
+    Description: S3 BucketName
+    Value: !Ref Bucket
