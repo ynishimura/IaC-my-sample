@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: sqs
+
+Resources:
+  testDBQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: test_DB.fifo
+      FifoQueue: true
+      ContentBasedDeduplication: true
+
+
+# 制限としてOutputは60個までなので超過する場合は別テンプレート、別スタックに分ける
+Outputs:
+
+  testDBQueueArn:
+    Description: test Queue ARN
+    Value: !GetAtt [testDBQueue, Arn]
+
